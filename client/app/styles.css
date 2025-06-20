@@ -1,0 +1,317 @@
+/* ─── Variables ───────────────────────────────────────────────────────── */
+:root {
+  --color-bg:        #f4f6f8;
+  --color-card:      #ffffff;
+  --color-primary:   #2563eb;
+  --color-primary-50:#e0ebff;
+  --color-accent:    #ef4444;
+  --color-text:      #1e293b;
+  --color-muted:     #64748b;
+  --gap-sm:          0.5rem;
+  --gap-md:          1rem;
+  --gap-lg:          1.5rem;
+  --radius:          0.75rem;
+  --shadow-light:    0 1px 3px rgba(0,0,0,0.1);
+  --shadow-strong:   0 4px 12px rgba(0,0,0,0.1);
+  --transition:      0.2s ease;
+}
+
+/* ─── Base Reset ───────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: var(--color-bg);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--color-text);
+  line-height: 1.5;
+}
+h1, h2 { margin: 0; }
+
+/* ─── Container & Heading ──────────────────────────────────────────────── */
+.container {
+  max-width: 900px;
+  margin: var(--gap-lg) auto;
+  padding: var(--gap-md);
+}
+.heading {
+  text-align: center;
+  font-size: 2.5rem;
+  color: var(--color-primary);
+  margin-bottom: var(--gap-lg);
+}
+
+/* ─── Add Task Form ───────────────────────────────────────────────────── */
+.add-task {
+  background: var(--color-card);
+  border-radius: var(--radius);
+  padding: var(--gap-lg);
+  box-shadow: var(--shadow-light);
+  display: grid;
+  gap: var(--gap-md);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  margin-bottom: var(--gap-lg);
+  align-items: start;
+}
+
+.add-form-task-title{
+   width: 100%;
+  padding: var(--gap-md);
+  font-size: 1rem;
+  border: 1px solid #cbd5e1;
+  border-radius: var(--radius);
+  background: #fff;
+  transition: border-color var(--transition);
+  grid-column: 1 / -1;
+}
+.add-task textarea,
+.form-dropdowns select,
+.form-dropdowns input {
+  width: 100%;
+  padding: var(--gap-md);
+  font-size: 1rem;
+  border: 1px solid #cbd5e1;
+  border-radius: var(--radius);
+  background: #fff;
+  transition: border-color var(--transition);
+}
+.add-task input:focus,
+.add-task textarea:focus,
+.form-dropdowns select:focus,
+.form-dropdowns input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.add-task textarea {
+  grid-column: 1 / -1;
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Dropdown row */
+.form-dropdowns {
+  display: flex;
+  gap: var(--gap-md);
+  grid-column: 1 / -1;
+}
+.form-dropdowns > * {
+  flex: 1;
+  min-width: 140px;
+}
+
+/* Add button */
+.add-task button {
+  grid-column: 1 / -1;
+  padding: var(--gap-md);
+  background: var(--color-primary);
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background var(--transition), box-shadow var(--transition);
+}
+.add-task button:hover {
+  background: #1e4bb8;
+  box-shadow: var(--shadow-strong);
+}
+
+/* ─── Task Grid ───────────────────────────────────────────────────────── */
+.task-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: var(--gap-lg);
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
+
+/* ─── Task Card ───────────────────────────────────────────────────────── */
+.task-card {
+  background: var(--color-card);
+  border-radius: var(--radius);
+  padding: var(--gap-md);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--shadow-light);
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+.task-card:hover {
+  box-shadow: var(--shadow-strong);
+  transform: translateY(-2px);
+}
+
+.task-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: var(--gap-sm);
+}
+
+.task-desc {
+  flex-grow: 1;
+  margin-bottom: var(--gap-sm);
+  color: var(--color-muted);
+  font-size: 0.95rem;
+}
+
+/* Meta row */
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-sm);
+  margin-bottom: var(--gap-sm);
+  font-size: 0.8rem;
+}
+.badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 999px;
+  font-weight: 500;
+}
+.badge.pending    { background: #fff7c2; color: #7a5c00; }
+.badge.processing { background: var(--color-primary-50); color: var(--color-primary); }
+.badge.completed  { background: #d1fae5; color: #065f46; }
+.badge.priority.low    { background: #f3e8ff; color: #6d28d9; }
+.badge.priority.medium { background: #cffafe; color: #115e59; }
+.badge.priority.high   { background: #fee2e2; color: #991b1b; }
+
+.due {
+  color: var(--color-muted);
+}
+
+/* ─── Card Actions & Edit ─────────────────────────────────────────────── */
+.actions,
+.edit-actions {
+  display: flex;
+  gap: var(--gap-sm);
+  justify-content: flex-end;
+  margin-top: var(--gap-sm);
+}
+.icon-blue { color: #2563eb; }
+.icon-red  { color: #ef4444; }
+.actions button {
+  background: none;
+  border: none;
+  padding: 0.25rem;
+  cursor: pointer;
+}
+.actions button:hover {
+  transform: scale(1.1);
+}
+.edit-card select,
+.edit-card input{
+    width: 100%;
+    padding: 4px;
+  font-size: 0.9rem;
+  border: 1px solid #cbd5e1;
+  border-radius: var(--radius);
+  background: #fff;
+  transition: border-color var(--transition);
+}
+.edit-card {
+  background: #f9fafb;
+  border: 1px dashed #cbd5e1;
+  border-radius: var(--radius);
+  padding: var(--gap-md);
+  display: grid;
+  gap: var(--gap-md);
+}
+.edit-controls {
+  display: grid;
+  gap: var(--gap-sm);
+}
+.edit-card button {
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  cursor: pointer;
+  border: none;
+  transition: background var(--transition);
+}
+.edit-card button:first-of-type {
+  background: var(--color-primary);
+  color: #fff;
+}
+.edit-card .cancel-btn {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+
+.error-message {
+  color: var(--color-accent);
+  font-size: 0.85rem;
+  margin-top: -0.5rem;
+  margin-bottom: var(--gap-sm);
+}
+
+/* ─── Read‑only Inputs ───────────────────────────────────────────────── */
+.readonly-input {
+  background: #f0f0f0;
+  border: 1px solid #e2e8f0;
+  padding: 0.5rem;
+  border-radius: var(--radius);
+}
+
+/* ─── Responsive Tweaks ──────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .add-task {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ─── Tablets & Small Desktops (≤900px): 2‑column cards ───────────────── */
+@media (max-width: 900px) {
+  .task-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .edit-controls {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ─── Phones & Very Small Screens (≤600px): 1‑column everything ──────── */
+@media (max-width: 600px) {
+  /* Stack the add form fields */
+  .add-task {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Force dropdowns vertical */
+  .form-dropdowns {
+    flex-direction: column;
+  }
+
+  /* Single‑column task list */
+  .task-list {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Make edit controls stack as well */
+  .edit-controls {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Enlarge buttons and touch targets */
+  .add-task button,
+  .edit-card button,
+  .actions button {
+    width: 100%;
+    padding: 0.75rem;
+  }
+
+  /* Tweak headings & text for legibility */
+  .heading {
+    font-size: 2rem;
+  }
+  .task-title {
+    font-size: 1.125rem;
+  }
+  .task-desc {
+    font-size: 0.9rem;
+  }
+}
